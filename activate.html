@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Pro - JobHuntKit</title>
+    <link rel="icon" type="image/svg+xml" href="/app/logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 50%, #fdf4ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+        }
+        .icon.pending {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
+        .icon.error {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+        p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            background: #2563eb;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        .features {
+            text-align: left;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .features h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+        .features li {
+            padding: 0.5rem 0;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .features li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: bold;
+        }
+        .manual-entry {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .manual-entry input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .manual-entry input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        .manual-entry button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <!-- Success State -->
+    <div class="container" id="success-state">
+        <div class="icon">🎉</div>
+        <h1>Welcome to Pro!</h1>
+        <p>Your license has been activated. You now have access to all Pro features.</p>
+        <div class="features">
+            <h3>You've unlocked:</h3>
+            <ul>
+                <li>Unlimited job applications</li>
+                <li>Unlimited resume versions</li>
+                <li>AI resume tailoring</li>
+                <li>AI cover letter generator</li>
+                <li>Advanced analytics</li>
+                <li>All future updates</li>
+            </ul>
+        </div>
+        <a href="/app/" class="btn">Open JobHuntKit →</a>
+    </div>
+
+    <!-- Pending/Manual Entry State -->
+    <div class="container hidden" id="manual-state">
+        <div class="icon pending">🔑</div>
+        <h1>Activate Pro License</h1>
+        <p>Enter your license key below to unlock all Pro features.</p>
+        <div class="manual-entry">
+            <input type="text" id="license-input" placeholder="Enter your license key" autocomplete="off">
+            <button onclick="activateLicense()">Activate License</button>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.875rem;">
+            Don't have a license? <a href="/#pricing" style="color: #2563eb;">Get Pro access</a>
+        </p>
+    </div>
+
+    <!-- Error State -->
+    <div class="container hidden" id="error-state">
+        <div class="icon error">✕</div>
+        <h1>Invalid License</h1>
+        <p>The license key provided is not valid. Please check your key and try again.</p>
+        <div class="manual-entry">
+            <input type="text" id="license-input-retry" placeholder="Enter your license key" autocomplete="off">
+            <button onclick="activateLicenseRetry()">Try Again</button>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.875rem;">
+            Need help? Contact <a href="mailto:support@jobhuntkit.com" style="color: #2563eb;">support@jobhuntkit.com</a>
+        </p>
+    </div>
+
+    <script>
+        // Valid license keys (in production, validate server-side)
+        // Format: JHK-XXXX-XXXX-XXXX
+        const VALID_PREFIXES = ['JHK-PRO-', 'JHK-LIFE-', 'JHK-2026-'];
+        
+        // Simple validation - in production use server-side validation
+        function isValidLicense(key) {
+            if (!key) return false;
+            key = key.trim().toUpperCase();
+            
+            // Check format
+            if (!/^JHK-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(key)) {
+                return false;
+            }
+            
+            // Check prefix
+            return VALID_PREFIXES.some(prefix => key.startsWith(prefix));
+        }
+        
+        function showState(stateId) {
+            document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+            document.getElementById(stateId).classList.remove('hidden');
+        }
+        
+        function storeLicense(key) {
+            localStorage.setItem('jobhuntkit_license', key.trim().toUpperCase());
+            localStorage.setItem('jobhuntkit_pro', 'true');
+            localStorage.setItem('jobhuntkit_activated', new Date().toISOString());
+        }
+        
+        function activateLicense() {
+            const key = document.getElementById('license-input').value;
+            if (isValidLicense(key)) {
+                storeLicense(key);
+                showState('success-state');
+            } else {
+                showState('error-state');
+                document.getElementById('license-input-retry').value = key;
+            }
+        }
+        
+        function activateLicenseRetry() {
+            const key = document.getElementById('license-input-retry').value;
+            if (isValidLicense(key)) {
+                storeLicense(key);
+                showState('success-state');
+            } else {
+                // Shake animation
+                const container = document.getElementById('error-state');
+                container.style.animation = 'shake 0.5s';
+                setTimeout(() => container.style.animation = '', 500);
+            }
+        }
+        
+        // Check URL params on load
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const key = params.get('key') || params.get('license');
+            
+            if (key) {
+                if (isValidLicense(key)) {
+                    storeLicense(key);
+                    showState('success-state');
+                } else {
+                    showState('error-state');
+                    document.getElementById('license-input-retry').value = key;
+                }
+            } else {
+                // Check if already activated
+                if (localStorage.getItem('jobhuntkit_pro') === 'true') {
+                    showState('success-state');
+                } else {
+                    showState('manual-state');
+                }
+            }
+        };
+        
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

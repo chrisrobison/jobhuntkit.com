@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download JobHuntKit - Mobile Apps & Browser Extension</title>
+    <link rel="icon" type="image/svg+xml" href="/app/logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light: #f8fafc;
+        }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+        }
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .download-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .download-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .download-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .download-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .download-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        .btn-disabled {
+            background: #e2e8f0;
+            color: #94a3b8;
+            cursor: not-allowed;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+        .pro-badge {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+        }
+        .features {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .features h2 {
+            margin-bottom: 1.5rem;
+        }
+        .features ul {
+            list-style: none;
+        }
+        .features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Download JobHuntKit</h1>
+        <p class="subtitle">Take your job search anywhere with our mobile apps and browser extension.</p>
+
+        <div class="download-grid">
+            <div class="download-card">
+                <div class="icon">🍎</div>
+                <span class="badge">Coming Soon</span>
+                <h3>iOS App</h3>
+                <p>Track applications and manage resumes on your iPhone or iPad.</p>
+                <span class="btn btn-disabled">App Store</span>
+            </div>
+
+            <div class="download-card">
+                <div class="icon">🤖</div>
+                <span class="badge">Coming Soon</span>
+                <h3>Android App</h3>
+                <p>Full-featured job hunt management on your Android device.</p>
+                <span class="btn btn-disabled">Play Store</span>
+            </div>
+
+            <div class="download-card">
+                <div class="icon">🧩</div>
+                <span class="badge pro-badge">Pro Feature</span>
+                <h3>Browser Extension</h3>
+                <p>Save jobs from LinkedIn, Indeed, and any job board with one click.</p>
+                <a href="/downloads/jobhuntkit-extension.zip" class="btn btn-primary" download>Download Extension</a>
+                <p style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.75rem;">Load in Chrome: Menu → Extensions → Enable Developer Mode → Load Unpacked → Select folder</p>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>What's Included with Pro</h2>
+            <ul>
+                <li>Unlimited job applications tracking</li>
+                <li>Unlimited resume versions</li>
+                <li>AI resume tailoring for each job</li>
+                <li>AI cover letter generator</li>
+                <li><strong>🔥 Automated job search</strong> — We scan job boards and deliver matches to you</li>
+                <li><strong>🧩 Browser extension</strong> — Save any job with one click while you browse</li>
+                <li><strong>📱 Mobile apps</strong> — Full access on iOS & Android</li>
+                <li>Cloud sync across all devices</li>
+                <li>Priority support</li>
+                <li>All future updates</li>
+            </ul>
+        </div>
+
+        <a href="/" class="back-link">← Back to JobHuntKit</a>
+    </div>
+</body>
+</html>
